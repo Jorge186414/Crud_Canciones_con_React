@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Swal from 'sweetalert2'
 
 function Crud() {
 
@@ -10,15 +11,27 @@ function Crud() {
     const guardarTrack = (evt) => {
         evt.preventDefault()
         if (!track.trim()) {
-            alert("Debes ingresar un nombre de cancion")
+            Swal.fire({
+                title: "Canciones Tesji",
+                text: "Debes ingresar un nombre de cancion",
+                icon: "error"
+              });
             return
         }
         if (!artista.trim()) {
-            alert("Debes ingresar un Artista")
+            Swal.fire({
+                title: "Canciones Tesji",
+                text: "Debes ingresar un artista de cancion",
+                icon: "error"
+              });
             return
         }
         if (!genero.trim()) {
-            alert("Debes ingresar un genero para la cancion")
+            Swal.fire({
+                title: "Canciones Tesji",
+                text: "Debes ingresar un genero para la cancion",
+                icon: "error"
+              });
             return
         }
         console.log(`Procesando datos... 
