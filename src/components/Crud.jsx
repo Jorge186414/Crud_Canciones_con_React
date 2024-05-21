@@ -38,18 +38,36 @@ function Crud() {
         Cancion: ${track}
         Artista: ${artista}
         Genero: ${genero}`)
-        // Unir datos a la lista de canciones
-        setCanciones(
-            [...canciones,
-            { cancion: track, artist: artista, gen: genero }]
-        )
-        // Limpiar datos del hook
-        setTrack('')
-        setArtista('')
-        setGenero('')
-        // Limpieza de datos del formulario
-        evt.target.reset()
-    }
+        Swal.fire({
+            title: "Seguro que deseas agregar el Track a la lista",
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: "Guardar",
+            denyButtonText: `No Guardar`
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                Swal.fire("Agregado Correctamente!", "", "success");
+                // Unir datos a la lista de canciones
+                setCanciones(
+                    [...canciones,
+                    { cancion: track, artist: artista, gen: genero }]
+                )
+                // Limpiar datos del hook
+                setTrack('')
+                setArtista('')
+                setGenero('')
+                // Limpieza de datos del formulario
+                evt.target.reset()
+            } else if (result.isDenied) {
+                Swal.fire("El Track no se agrego", "", "info");
+            } else {
+                // Limpieza de datos del formulario
+                evt.target.reset()
+            }
+        });
+
+    };
 
     return (
         <>
