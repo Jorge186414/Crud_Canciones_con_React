@@ -56,7 +56,7 @@ function Crud() {
             <div className="container border border-primary p-4 mt-3 rounded-3 text-center">
                 <h1>Registro de Canciones</h1>
                 <div className="row">
-                    <div className='col-sm'>
+                    <div className='col-12 col-md-4 col-lg-3 mt-3'>
                         <form onSubmit={guardarTrack}>
                             <input
                                 type="text"
@@ -76,10 +76,10 @@ function Crud() {
                                 className='form-control mb-3'
                                 onChange={(evt) => setGenero(evt.target.value)}
                             />
-                            <button type='submit' className='btn btn-success' >Agregar Cancion</button>
+                            <button type='submit' className='btn btn-info' >Agregar Cancion</button>
                         </form>
                     </div>
-                    <div className='col-sm'>
+                    <div className='col-12 col-md-8 col-lg-9'>
                         <h3>Lista de canciones</h3>
                         <ol>{
                             canciones.map((cancion, index) => (
