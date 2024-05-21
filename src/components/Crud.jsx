@@ -53,10 +53,11 @@ function Crud() {
 
     return (
         <>
-            <div className="container border border-primary p-4 mt-3 rounded-3 text-center">
-                <h1>Registro de Canciones</h1>
+            <div className="container border border-primary p-4 mt-3 rounded-3">
+                <h1 className='text-center'>Registro de Canciones</h1>
                 <div className="row">
-                    <div className='col-12 col-md-4 col-lg-3 mt-3'>
+                    <div className='col-12 col-md-4 col-lg-3'>
+                        <h3 className='text-center'>Formulario</h3>
                         <form onSubmit={guardarTrack}>
                             <input
                                 type="text"
@@ -76,17 +77,21 @@ function Crud() {
                                 className='form-control mb-3'
                                 onChange={(evt) => setGenero(evt.target.value)}
                             />
-                            <button type='submit' className='btn btn-info' >Agregar Cancion</button>
+                            <button type='submit' className='btn btn-info btn-block' >Agregar Cancion</button>
                         </form>
                     </div>
                     <div className='col-12 col-md-8 col-lg-9'>
                         <h3>Lista de canciones</h3>
-                        <ol>{
+                        <ul className='list-group'>{
                             canciones.map((cancion, index) => (
-                                <li key={index}>{cancion.cancion}, {cancion.artist}, {cancion.gen}</li>
+                                <li key={index} className='list-group-item'>
+                                    <span className='lead'>  {cancion.cancion}, {cancion.artist}, {cancion.gen} </span>
+                                    <button className='btn btn-sm btn-warning float-right mx-2'>Editar</button>
+                                    <button className='btn btn-sm btn-danger float-right mx-2'>Eliminar</button>
+                                </li>
                             ))
                         }
-                        </ol>
+                        </ul>
                     </div>
                 </div>
             </div>
