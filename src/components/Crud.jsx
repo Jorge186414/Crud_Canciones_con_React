@@ -8,6 +8,13 @@ function Crud() {
     const [genero, setGenero] = useState('')
     const [canciones, setCanciones] = useState([])
 
+    const limpiarHooks = () => {
+        // Limpiar datos del hook
+        setTrack('')
+        setArtista('')
+        setGenero('')
+    }
+
     const guardarTrack = (evt) => {
         evt.preventDefault()
         if (!track.trim()) {
@@ -53,16 +60,14 @@ function Crud() {
                     [...canciones,
                     { cancion: track, artist: artista, gen: genero }]
                 )
-                // Limpiar datos del hook
-                setTrack('')
-                setArtista('')
-                setGenero('')
+                limpiarHooks()
                 // Limpieza de datos del formulario
                 evt.target.reset()
             } else if (result.isDenied) {
                 Swal.fire("El Track no se agrego", "", "info");
             } else {
                 // Limpieza de datos del formulario
+                limpiarHooks()
                 evt.target.reset()
             }
         });
