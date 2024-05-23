@@ -8,6 +8,7 @@ function Crud() {
     const [track, setTrack] = useState('')
     const [artista, setArtista] = useState('')
     const [genero, setGenero] = useState('')
+    const [modoEditar, setModoEditar] = useState(false)
     const [canciones, setCanciones] = useState([])
 
     const limpiarHooks = () => {
@@ -34,12 +35,17 @@ function Crud() {
             if (result.isConfirmed) {
                 setCanciones(arrayFiltrado)
                 Swal.fire({
-                    title: "Eliminado!",
+                    title: "Track Eliminado!",
                     text: "El registro de ha eliminado",
                     icon: "success"
                 });
             }
         });
+    }
+
+    const editarTrack = (cancion) => {
+        alert(cancion.cancion)
+        setModoEditar(true)
     }
 
     const guardarTrack = (evt) => {
@@ -113,21 +119,29 @@ function Crud() {
                                 type="text"
                                 placeholder='Track'
                                 className='form-control mb-3'
+                                id='cancion'
                                 onChange={(evt) => setTrack(evt.target.value)}
                             />
                             <input
                                 type="text"
                                 placeholder='Artista'
                                 className='form-control mb-3'
+                                id='artistas'
                                 onChange={(evt) => setArtista(evt.target.value)}
                             />
                             <input
                                 type="text"
                                 placeholder='Genero'
                                 className='form-control mb-3'
+                                id='genero'
                                 onChange={(evt) => setGenero(evt.target.value)}
                             />
-                            <button type='submit' className='btn btn-info btn-block' >Agregar Cancion</button>
+                            <button type='submit' className='btn btn-info btn-block'>
+                                {
+                                    modoEditar ? 'Editar Cancion ' : 'Agregar Cancion'
+                                    
+                                }
+                            </button>
                         </form>
                     </div>
                     <div className='col-12 col-md-8 col-lg-9'>
@@ -136,7 +150,7 @@ function Crud() {
                             canciones.map((cancion, index) => (
                                 <li key={index} className='list-group-item'>
                                     <span className='lead'> {cancion.cancion}, {cancion.artist}, {cancion.gen} </span>
-                                    <button className='btn btn-sm btn-warning float-right mx-2'>Editar</button>
+                                    <button onClick={() => editarTrack(cancion)} className='btn btn-sm btn-warning float-right mx-2'>Editar</button>
                                     <button onClick={() => eliminarTrack(cancion.id)} className='btn btn-sm btn-danger float-right mx-2'>Eliminar</button>
                                 </li>
                             ))
@@ -144,7 +158,7 @@ function Crud() {
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div >
         </>
     )
 }
