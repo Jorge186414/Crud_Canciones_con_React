@@ -19,11 +19,27 @@ function Crud() {
 
     // Metodo para eliminar track
     const eliminarTrack = (id) => {
-        alert(id)
         // Buscar y filtrar el Id del registro
         // Si lo encuentra lo quita de la lista sin afectar a los demas registros
         const arrayFiltrado = canciones.filter(cancion => cancion.id != id)
-        setCanciones(arrayFiltrado)
+        Swal.fire({
+            title: "Estas seguro?",
+            text: "No podras revertir el cambio",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Si, Borrarlo!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                setCanciones(arrayFiltrado)
+                Swal.fire({
+                    title: "Eliminado!",
+                    text: "El registro de ha eliminado",
+                    icon: "success"
+                });
+            }
+        });
     }
 
     const guardarTrack = (evt) => {
