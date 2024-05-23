@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import shortid from 'shortid'
 import Swal from 'sweetalert2'
 
 function Crud() {
@@ -58,7 +59,7 @@ function Crud() {
                 // Unir datos a la lista de canciones
                 setCanciones(
                     [...canciones,
-                    { cancion: track, artist: artista, gen: genero }]
+                    { id:shortid.generate(), cancion: track, artist: artista, gen: genero }]
                 )
                 limpiarHooks()
                 // Limpieza de datos del formulario
@@ -108,7 +109,7 @@ function Crud() {
                         <ul className='list-group'>{
                             canciones.map((cancion, index) => (
                                 <li key={index} className='list-group-item'>
-                                    <span className='lead'>  {cancion.cancion}, {cancion.artist}, {cancion.gen} </span>
+                                    <span className='lead'>  {cancion.id},{cancion.cancion}, {cancion.artist}, {cancion.gen} </span>
                                     <button className='btn btn-sm btn-warning float-right mx-2'>Editar</button>
                                     <button className='btn btn-sm btn-danger float-right mx-2'>Eliminar</button>
                                 </li>
