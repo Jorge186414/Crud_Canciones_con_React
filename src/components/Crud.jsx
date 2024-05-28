@@ -21,7 +21,7 @@ function Crud() {
     }
 
     // Metodo para eliminar track
-    const eliminarTrack = (id) => {
+    const eliminarTrack = id => {
         // Buscar y filtrar el Id del registro
         // Si lo encuentra lo quita de la lista sin afectar a los demas registros
         const arrayFiltrado = canciones.filter(cancion => cancion.id != id)
@@ -45,6 +45,7 @@ function Crud() {
         });
     }
 
+    // Metodo para obtener los datos de la cancion a editar
     const editarTrack = (cancion) => {
         setModoEditar(true)
         // Modificamos los estados de los valores del track
@@ -52,6 +53,34 @@ function Crud() {
         setArtista(cancion.artist)
         setGenero(cancion.gen)
         // Se necesita tambien crear un estado para el ID y setear su valor
+    }
+
+    const editarTrackOk = (evt) => {
+        evt.preventDefault()
+        if (!track.trim()) {
+            Swal.fire({
+                title: "Canciones Tesji",
+                text: "Debes ingresar un nombre de cancion",
+                icon: "error"
+            });
+            return
+        }
+        if (!artista.trim()) {
+            Swal.fire({
+                title: "Canciones Tesji",
+                text: "Debes ingresar un artista de cancion",
+                icon: "error"
+            });
+            return
+        }
+        if (!genero.trim()) {
+            Swal.fire({
+                title: "Canciones Tesji",
+                text: "Debes ingresar un genero para la cancion",
+                icon: "error"
+            });
+            return
+        }
     }
 
     const guardarTrack = (evt) => {
@@ -80,10 +109,6 @@ function Crud() {
             });
             return
         }
-        console.log(`Procesando datos... 
-        Cancion: ${track}
-        Artista: ${artista}
-        Genero: ${genero}`)
         Swal.fire({
             title: "Seguro que deseas agregar el Track a la lista",
             showDenyButton: true,
@@ -114,9 +139,10 @@ function Crud() {
         <>
             <div className="container border border-primary p-4 mt-3 rounded-3">
                 <h1 className='text-center'>Registro de Canciones</h1>
+                <hr />
                 <div className="row">
                     <div className='col-12 col-md-4 col-lg-3'>
-                        <h3 className='text-center'>Formulario</h3>
+                        <h3 className='text-center align-center'>Formulario</h3>
                         <form onSubmit={guardarTrack}>
                             <input
                                 type="text"
