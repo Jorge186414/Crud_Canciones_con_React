@@ -136,10 +136,10 @@ function Crud() {
                                 id='genero'
                                 onChange={(evt) => setGenero(evt.target.value)}
                             />
-                            <button type='submit' className='btn btn-info btn-block'>
+                            <button type='submit' className={`btn btn-block' ${modoEditar ? 'btn-warning' : 'btn-info'}`}>
                                 {
                                     modoEditar ? 'Editar Cancion ' : 'Agregar Cancion'
-                                    
+
                                 }
                             </button>
                         </form>
