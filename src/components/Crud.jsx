@@ -209,14 +209,15 @@ function Crud() {
                     <div className='col-12 col-md-8 col-lg-9'>
                         <h3>Lista de canciones</h3>
                         <ul className='list-group'>{
-
-                            canciones.map((cancion, index) => (
-                                <li key={index} className='list-group-item'>
-                                    <span className='lead'> {cancion.cancion}, {cancion.artist}, {cancion.gen} </span>
-                                    <button onClick={() => editarTrack(cancion)} className='btn btn-sm btn-warning float-right mx-2'>Editar</button>
-                                    <button onClick={() => eliminarTrack(cancion.id)} className='btn btn-sm btn-danger float-right mx-2'>Eliminar</button>
-                                </li>
-                            ))
+                            canciones.length == 0 ? (<li className='list-group-item'>No hay canciones para mostrar</li>)
+                                :
+                                (canciones.map((cancion, index) => (
+                                    <li key={index} className='list-group-item'>
+                                        <span className='lead'> {cancion.cancion}, {cancion.artist}, {cancion.gen} </span>
+                                        <button onClick={() => editarTrack(cancion)} className='btn btn-sm btn-warning float-right mx-2'>Editar</button>
+                                        <button onClick={() => eliminarTrack(cancion.id)} className='btn btn-sm btn-danger float-right mx-2'>Eliminar</button>
+                                    </li>
+                                )))
                         }
                         </ul>
                     </div>
