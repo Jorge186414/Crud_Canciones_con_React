@@ -81,6 +81,17 @@ function Crud() {
             });
             return
         }
+        const arrayEditado = canciones.map(
+            cancion => cancion.id == id ? {
+                id: id,
+                cancion: track,
+                artist: artista,
+                gen: genero
+            } : cancion
+        )
+        setCanciones(arrayEditado)
+        setModoEditar(false)
+        limpiarHooks()
     }
 
     const guardarTrack = (evt) => {
@@ -143,7 +154,7 @@ function Crud() {
                 <div className="row">
                     <div className='col-12 col-md-4 col-lg-3'>
                         <h3 className='text-center align-center'>Formulario</h3>
-                        <form onSubmit={guardarTrack}>
+                        <form onSubmit={modoEditar ? editarTrackOk : guardarTrack}>
                             <input
                                 type="text"
                                 placeholder='Track'
