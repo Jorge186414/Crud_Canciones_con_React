@@ -10,12 +10,14 @@ function Crud() {
     const [genero, setGenero] = useState('')
     const [modoEditar, setModoEditar] = useState(false)
     const [canciones, setCanciones] = useState([])
+    const [id, setId] = useState('')
 
     const limpiarHooks = () => {
         // Limpiar datos del hook
         setTrack('')
         setArtista('')
         setGenero('')
+        setId('')
     }
 
     // Metodo para eliminar track
@@ -44,8 +46,12 @@ function Crud() {
     }
 
     const editarTrack = (cancion) => {
-        alert(cancion.cancion)
         setModoEditar(true)
+        // Modificamos los estados de los valores del track
+        setTrack(cancion.cancion)
+        setArtista(cancion.artist)
+        setGenero(cancion.gen)
+        // Se necesita tambien crear un estado para el ID y setear su valor
     }
 
     const guardarTrack = (evt) => {
@@ -94,14 +100,11 @@ function Crud() {
                     { id: shortid.generate(), cancion: track, artist: artista, gen: genero }]
                 )
                 limpiarHooks()
-                // Limpieza de datos del formulario
-                evt.target.reset()
             } else if (result.isDenied) {
                 Swal.fire("El Track no se agrego", "", "info");
             } else {
                 // Limpieza de datos del formulario
                 limpiarHooks()
-                evt.target.reset()
             }
         });
 
@@ -121,6 +124,7 @@ function Crud() {
                                 className='form-control mb-3'
                                 id='cancion'
                                 onChange={(evt) => setTrack(evt.target.value)}
+                                value={track}
                             />
                             <input
                                 type="text"
@@ -128,6 +132,7 @@ function Crud() {
                                 className='form-control mb-3'
                                 id='artistas'
                                 onChange={(evt) => setArtista(evt.target.value)}
+                                value={artista}
                             />
                             <input
                                 type="text"
@@ -135,6 +140,7 @@ function Crud() {
                                 className='form-control mb-3'
                                 id='genero'
                                 onChange={(evt) => setGenero(evt.target.value)}
+                                value={genero}
                             />
                             <button type='submit' className={`btn btn-block' ${modoEditar ? 'btn-warning' : 'btn-info'}`}>
                                 {
