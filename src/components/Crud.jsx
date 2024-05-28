@@ -53,6 +53,7 @@ function Crud() {
         setArtista(cancion.artist)
         setGenero(cancion.gen)
         // Se necesita tambien crear un estado para el ID y setear su valor
+        setId(cancion.id)
     }
 
     const editarTrackOk = (evt) => {
@@ -89,9 +90,27 @@ function Crud() {
                 gen: genero
             } : cancion
         )
-        setCanciones(arrayEditado)
-        setModoEditar(false)
-        limpiarHooks()
+        Swal.fire({
+            title: "Seguro que deseas guardar los cambios del Track",
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: "Guardar",
+            denyButtonText: `No Guardar`
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                Swal.fire("Editado Correctamente!", "", "success");
+                // Unir datos a la lista de canciones
+                setCanciones(arrayEditado)
+                setModoEditar(false)
+                limpiarHooks()
+            } else if (result.isDenied) {
+                Swal.fire("No se Guardaron los cambios", "", "info");
+            } else {
+                // Limpieza de datos del formulario
+                limpiarHooks()
+            }
+        });
     }
 
     const guardarTrack = (evt) => {
@@ -190,6 +209,7 @@ function Crud() {
                     <div className='col-12 col-md-8 col-lg-9'>
                         <h3>Lista de canciones</h3>
                         <ul className='list-group'>{
+
                             canciones.map((cancion, index) => (
                                 <li key={index} className='list-group-item'>
                                     <span className='lead'> {cancion.cancion}, {cancion.artist}, {cancion.gen} </span>
